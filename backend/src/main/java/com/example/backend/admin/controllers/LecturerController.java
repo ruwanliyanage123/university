@@ -8,6 +8,8 @@ import com.example.backend.admin.services.LecturerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,5 +76,19 @@ public class LecturerController {
         return lecturer;
     }
 
-
+    /**
+     * to delete lecturer
+     * @param lecturerId lecturer id
+     * @return response of request
+     */
+    @DeleteMapping("/delete/{lecturerId}")
+    public ResponseEntity<?> deleteLecturer(@PathVariable int lecturerId){
+        Lecturer lecturer = null;
+        try {
+            lecturer = lecturerService.getOneLecturer(lecturerId);
+        } catch (LecturerNotFoundException e) {
+            logger.error("lecturer not in database. re check the lecturer id number", e);
+        }
+        return lecturerService.deleteLecturer(lecturer);
+    }
 }
