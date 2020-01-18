@@ -4,8 +4,10 @@ import com.example.backend.admin.Repositories.StudentReposiroty;
 import com.example.backend.admin.exceptions.StudentNotFoundException;
 import com.example.backend.admin.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.Subject;
 import java.util.List;
 
 /**
@@ -46,20 +48,18 @@ public class StudentService {
 
     /**
      * to invoke delete method in jpa
-     * @param studentId student id
+     * @param student student
      * @return selected student
-     * @throws StudentNotFoundException when student not in database
      */
-    public Student deleteStudent(int studentId) throws StudentNotFoundException{
-        return studentReposiroty.findById(studentId)
-                .orElseThrow(()->new StudentNotFoundException());
+    public ResponseEntity<?> deleteStudent(Student student) {
+        studentReposiroty.delete(student);
+        return ResponseEntity.ok().build();
     }
 
     /**
      * to invoke update method in jpa
      * @param student updated student
      * @return selected student
-     * @throws StudentNotFoundException when student not in database
      */
     public Student updateStudent(Student student){
         return studentReposiroty.save(student);
