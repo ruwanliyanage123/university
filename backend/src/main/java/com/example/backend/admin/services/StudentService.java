@@ -5,6 +5,8 @@ import com.example.backend.admin.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * service class for student
  */
@@ -20,5 +22,13 @@ public class StudentService {
      */
     public Student addStudent(Student student){
         return studentReposiroty.save(student);
+    }
+
+    /**
+     * to invoke find all method in jpa
+     * @return list of student
+     */
+    public List<Student> getAllStudent(){
+        return studentReposiroty.findAll();
     }
 }
