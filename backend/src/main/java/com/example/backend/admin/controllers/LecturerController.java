@@ -6,11 +6,13 @@ import com.example.backend.admin.services.LecturerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 /**
  * controller class for the lecturer
@@ -37,4 +39,20 @@ public class LecturerController {
         }
         return lecturer1;
     }
+
+    /**
+     * to retrieve all lecturers
+     * @return list of lecturers
+     */
+    @GetMapping("/all")
+    public List<Lecturer> getAllLecturer(){
+        List<Lecturer> lecturers = null;
+        try {
+            lecturers = lecturerService.getAllLecturer();
+        }catch (NullPointerException e){
+            logger.error("Null pointer due to Student list. Check database connections", e);
+        }
+        return lecturers;
+    }
+
 }
