@@ -56,4 +56,13 @@ import java.util.List;
             lecturerRepository.delete(lecturer);
             return ResponseEntity.ok().build();
         }
+
+        /**
+         * to invoke update method in jpa
+         * @param lecturer updated lecturer
+         * @return selected lecturer
+         */
+        public Lecturer updateLecturer(Lecturer lecturer){
+            return lecturerRepository.save(lecturer);
+        }
     }
