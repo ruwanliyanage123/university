@@ -43,4 +43,15 @@ public class StudentService {
         return studentReposiroty.findById(studentId)
                 .orElseThrow(()->new StudentNotFoundException());
     }
+
+    /**
+     * to invoke delete method in jpa
+     * @param studentId student id
+     * @return selected student
+     * @throws StudentNotFoundException when student not in database
+     */
+    public Student deleteStudent(int studentId) throws StudentNotFoundException{
+        return studentReposiroty.findById(studentId)
+                .orElseThrow(()->new StudentNotFoundException());
+    }
 }
