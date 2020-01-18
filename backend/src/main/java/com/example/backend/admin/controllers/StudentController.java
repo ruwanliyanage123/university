@@ -5,10 +5,13 @@ import com.example.backend.admin.services.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * controller class for the student
@@ -34,5 +37,20 @@ public class StudentController {
             logger.error("check the payload, null pointer is throwing", e);
         }
         return student1;
+    }
+
+    /**
+     * to retrieve all students
+     * @return list of students
+     */
+    @GetMapping("/all")
+    public List<Student> getAllStudent(){
+        List<Student> students = null;
+        try {
+            students = studentService.getAllStudent();
+        }catch (NullPointerException e){
+            logger.error("Null pointer due to Student list. Check database connections", e);
+        }
+        return students;
     }
 }
