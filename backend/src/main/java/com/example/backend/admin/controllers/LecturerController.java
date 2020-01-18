@@ -1,5 +1,7 @@
 package com.example.backend.admin.controllers;
 
+import com.example.backend.admin.exceptions.LecturerNotFoundException;
+import com.example.backend.admin.exceptions.StudentNotFoundException;
 import com.example.backend.admin.models.Lecturer;
 import com.example.backend.admin.models.Student;
 import com.example.backend.admin.services.LecturerService;
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +57,22 @@ public class LecturerController {
         }
         return lecturers;
     }
+
+    /**
+     * to retrieve one lecturer
+     * @param lecturerId lecturer id
+     * @return selected lecturer
+     */
+    @GetMapping("/one/{lecturerId}")
+    public Lecturer getOneLecturer(@PathVariable int lecturerId){
+        Lecturer lecturer = null;
+        try {
+            lecturer = lecturerService.getOneLecturer(lecturerId);
+        } catch (LecturerNotFoundException e) {
+            logger.error("Lecturer not in database. re check the lecturer id number", e);
+        }
+        return lecturer;
+    }
+
 
 }
