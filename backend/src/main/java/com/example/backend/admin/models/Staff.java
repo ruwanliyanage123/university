@@ -1,21 +1,37 @@
 package com.example.backend.admin.models;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class Staff {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int staffID;
 
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "mobile", nullable = false)
     private String mobile;
 
+    @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "salary", nullable = false)
     private double salary;
 
+    @Column(name = "city", nullable = false)
     private String city;
 
+    @Column(name = "street", nullable = false)
     private String street;
 
     public int getStaffID() {
@@ -82,3 +98,4 @@ public abstract class Staff {
         this.street = street;
     }
 }
+
