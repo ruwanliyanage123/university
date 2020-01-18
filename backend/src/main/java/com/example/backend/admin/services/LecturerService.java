@@ -6,6 +6,7 @@ import com.example.backend.admin.exceptions.StudentNotFoundException;
 import com.example.backend.admin.models.Lecturer;
 import com.example.backend.admin.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,5 +45,15 @@ import java.util.List;
         public Lecturer getOneLecturer(int lecturerId) throws LecturerNotFoundException {
             return lecturerRepository.findById(lecturerId)
                     .orElseThrow(()->new LecturerNotFoundException());
+        }
+
+        /**
+         * to invoke delete method in jpa
+         * @param lecturer lecturer
+         * @return selected lecturer
+         */
+        public ResponseEntity<?> deleteLecturer(Lecturer lecturer) {
+            lecturerRepository.delete(lecturer);
+            return ResponseEntity.ok().build();
         }
     }
