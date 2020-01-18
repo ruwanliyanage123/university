@@ -6,6 +6,7 @@ import com.example.backend.admin.services.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,17 +75,28 @@ public class StudentController {
         return student;
     }
 
+    /**
+     * to delete student
+     * @param studentId student id
+     * @return response of request
+     */
     @DeleteMapping("/delete/{studentId}")
-    public Student deleteStudent(@PathVariable int studentId){
+    public ResponseEntity<?> deleteStudent(@PathVariable int studentId){
         Student student = null;
         try {
-            student = studentService.deleteStudent(studentId);
+            student = studentService.getOneStudent(studentId);
         } catch (StudentNotFoundException e) {
             logger.error("Student not in database. re check the student id number", e);
         }
-        return student;
+        return studentService.deleteStudent(student);
     }
 
+    /**
+     * to update student
+     * @param studentId student id
+     * @param student student
+     * @return updated student
+     */
     @PutMapping("/update/{studentId}")
     public Student updateStudent(@PathVariable int studentId, @RequestBody Student student){
         Student student1 = null;
@@ -93,6 +105,7 @@ public class StudentController {
         } catch (StudentNotFoundException e) {
             logger.error("Student not in database. re check the student id number", e);
         }
+        assert student1 != null;
         student1.setFirstName(student.getFirstName());
         student1.setLastName(student.getLastName());
         student1.setMobile(student.getMobile());
