@@ -1,6 +1,8 @@
 package com.example.backend.admin.services;
 
 import com.example.backend.admin.Repositories.LecturerRepository;
+import com.example.backend.admin.exceptions.LecturerNotFoundException;
+import com.example.backend.admin.exceptions.StudentNotFoundException;
 import com.example.backend.admin.models.Lecturer;
 import com.example.backend.admin.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,16 @@ import java.util.List;
          */
         public List<Lecturer> getAllLecturer(){
             return lecturerRepository.findAll();
+        }
+
+        /**
+         * to invoke find single method in jpa
+         * @param lecturerId lecturer id
+         * @return selected lecturer
+         * @throws LecturerNotFoundException when lecturer not in database
+         */
+        public Lecturer getOneLecturer(int lecturerId) throws LecturerNotFoundException {
+            return lecturerRepository.findById(lecturerId)
+                    .orElseThrow(()->new LecturerNotFoundException());
         }
     }
