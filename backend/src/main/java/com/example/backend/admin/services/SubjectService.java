@@ -18,7 +18,7 @@ public class SubjectService {
      * @param subject
      * @return inserted subject
      */
-    public Subject addStudent(Subject subject){
+    public Subject addSubject(Subject subject){
         return subjectRepository.save(subject);
     }
 
@@ -26,7 +26,7 @@ public class SubjectService {
      * to invoke find all method in jpa
      * @return list of subject
      */
-    public List<Subject> getAllStudent(){
+    public List<Subject> getAllSubject(){
         return subjectRepository.findAll();
     }
 }
