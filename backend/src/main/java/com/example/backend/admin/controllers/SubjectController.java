@@ -8,6 +8,8 @@ import com.example.backend.admin.services.SubjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,5 +71,16 @@ public class SubjectController {
             logger.error("Subject not in database. re check the subject id", e);
         }
         return subject;
+    }
+
+    @DeleteMapping("/delete/{subjectId}")
+    public ResponseEntity<?> deleteSubject(@PathVariable int subjectId){
+        Subject subject = null;
+        try {
+            subject = subjectService.getOneSubject(subjectId);
+        } catch (SubjectNotFoundException e) {
+            logger.error("Student not in database. re check the student id number", e);
+        }
+        return subjectService.deleteSubject(subject);
     }
 }

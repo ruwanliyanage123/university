@@ -6,6 +6,7 @@ import com.example.backend.admin.exceptions.SubjectNotFoundException;
 import com.example.backend.admin.models.Student;
 import com.example.backend.admin.models.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import sun.awt.SunToolkit;
 
@@ -46,12 +47,11 @@ public class SubjectService {
 
     /**
      * to invoke delete method in jpa
-     * @param subjectId subject id
-     * @return selected subject
-     * @throws SubjectNotFoundException when subject not in database
+     * @param subject subject
+     * @return response
      */
-    public Subject deleteSubject(int subjectId) throws SubjectNotFoundException{
-        return subjectRepository.findById(subjectId)
-                .orElseThrow(()->new SubjectNotFoundException());
+    public ResponseEntity<?> deleteSubject(Subject subject){
+        subjectRepository.delete(subject);
+        return ResponseEntity.ok().build();
     }
 }
