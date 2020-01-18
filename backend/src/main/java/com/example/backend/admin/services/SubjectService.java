@@ -54,4 +54,13 @@ public class SubjectService {
         subjectRepository.delete(subject);
         return ResponseEntity.ok().build();
     }
+
+    /**
+     * to invoke update method in jpa
+     * @param  subject subject
+     * @return selected subject
+     */
+    public Subject updateSubject(Subject subject){
+        return subjectRepository.save(subject);
+    }
 }
