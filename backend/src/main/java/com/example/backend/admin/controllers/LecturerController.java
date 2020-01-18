@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -90,5 +91,31 @@ public class LecturerController {
             logger.error("lecturer not in database. re check the lecturer id number", e);
         }
         return lecturerService.deleteLecturer(lecturer);
+    }
+
+    /**
+     * to update lecturer
+     * @param lecturerId lecturerId
+     * @param lecturer lecturer
+     * @return updated lecturer
+     */
+    @PutMapping("/update/{lecturerId}")
+    public Lecturer updateLecturer(@PathVariable int lecturerId, @RequestBody Lecturer lecturer){
+        Lecturer lecturer1 = null;
+        try {
+            lecturer1 = lecturerService.getOneLecturer(lecturerId);
+        } catch (LecturerNotFoundException e) {
+            logger.error("lecturer not in database. re check the lecturer id number", e);
+        }
+        assert lecturer1 != null;
+        lecturer1.setFirstName(lecturer.getFirstName());
+        lecturer1.setLastName(lecturer.getLastName());
+        lecturer1.setEmail(lecturer.getEmail());
+        lecturer1.setMobile(lecturer.getMobile());
+        lecturer1.setCity(lecturer.getCity());
+        lecturer1.setStreet(lecturer.getStreet());
+        lecturer1.setSalary(lecturer.getSalary());
+        lecturer1.setLectureHours(lecturer.getLectureHours());
+        return lecturerService.updateLecturer(lecturer1);
     }
 }
