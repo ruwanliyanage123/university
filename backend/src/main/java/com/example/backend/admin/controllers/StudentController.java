@@ -6,6 +6,7 @@ import com.example.backend.admin.services.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +67,17 @@ public class StudentController {
         Student student = null;
         try {
             student = studentService.getOneStudent(studentId);
+        } catch (StudentNotFoundException e) {
+            logger.error("Student not in database. re check the student id number", e);
+        }
+        return student;
+    }
+
+    @DeleteMapping("/delete/{studentId}")
+    public Student deleteStudent(@PathVariable int studentId){
+        Student student = null;
+        try {
+            student = studentService.deleteStudent(studentId);
         } catch (StudentNotFoundException e) {
             logger.error("Student not in database. re check the student id number", e);
         }
