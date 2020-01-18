@@ -57,12 +57,11 @@ public class StudentService {
 
     /**
      * to invoke update method in jpa
-     * @param studentId student id
+     * @param student updated student
      * @return selected student
      * @throws StudentNotFoundException when student not in database
      */
-    public Student updateStudent(int studentId) throws StudentNotFoundException{
-        return studentReposiroty.findById(studentId)
-                .orElseThrow(()->new StudentNotFoundException());
+    public Student updateStudent(Student student){
+        return studentReposiroty.save(student);
     }
 }
