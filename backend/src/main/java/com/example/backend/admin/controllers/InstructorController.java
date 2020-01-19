@@ -1,5 +1,7 @@
 package com.example.backend.admin.controllers;
 
+import com.example.backend.admin.exceptions.InstructorNotFoundException;
+import com.example.backend.admin.exceptions.LecturerNotFoundException;
 import com.example.backend.admin.models.Instructor;
 import com.example.backend.admin.models.Lecturer;
 import com.example.backend.admin.services.InstructorService;
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +56,21 @@ public class InstructorController {
             logger.error("Null pointer due to Instructor list. Check database connections", e);
         }
         return instructors;
+    }
+
+    /**
+     * to retrieve one instructor
+     * @param instructorId instructor id
+     * @return selected instructor
+     */
+    @GetMapping("/one/{instructorId}")
+    public Instructor getOneInstructor(@PathVariable int instructorId){
+        Instructor instructor = null;
+        try {
+            instructor = instructorService.getOneInstructor(instructorId);
+        } catch (InstructorNotFoundException e) {
+            logger.error("Instructor not in database. re check the instructor id number", e);
+        }
+        return instructor;
     }
 }
