@@ -1,9 +1,7 @@
 package com.example.backend.admin.controllers;
 
 import com.example.backend.admin.exceptions.LecturerNotFoundException;
-import com.example.backend.admin.exceptions.StudentNotFoundException;
 import com.example.backend.admin.models.Lecturer;
-import com.example.backend.admin.models.Student;
 import com.example.backend.admin.services.LecturerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
