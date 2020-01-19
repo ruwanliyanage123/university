@@ -56,4 +56,13 @@ public class InstructorService {
         instructorRepository.delete(instructor);
         return ResponseEntity.ok().build();
     }
+
+    /**
+     * to invoke update method in jpa
+     * @param instructor updated instructor
+     * @return selected instructor
+     */
+    public Instructor updateInstructor(Instructor instructor){
+        return instructorRepository.save(instructor);
+    }
 }
