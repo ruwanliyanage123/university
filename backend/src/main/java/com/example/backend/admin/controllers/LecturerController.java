@@ -54,7 +54,7 @@ public class LecturerController {
         try {
             lecturers = lecturerService.getAllLecturer();
         }catch (NullPointerException e){
-            logger.error("Null pointer due to Student list. Check database connections", e);
+            logger.error("Null pointer due to Lecture list. Check database connections", e);
         }
         return lecturers;
     }

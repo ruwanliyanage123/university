@@ -6,10 +6,13 @@ import com.example.backend.admin.services.InstructorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * constructor for the instructor
@@ -35,5 +38,20 @@ public class InstructorController {
             logger.error("check the payload, null pointer is throwing", e);
         }
         return instructor1;
+    }
+
+    /**
+     * to retrieve all instructor
+     * @return list of instructor
+     */
+    @GetMapping("/all")
+    public List<Instructor> getAllInstructor(){
+        List<Instructor> instructors = null;
+        try {
+            instructors = instructorService.getAllInstructor();
+        }catch (NullPointerException e){
+            logger.error("Null pointer due to Instructor list. Check database connections", e);
+        }
+        return instructors;
     }
 }
