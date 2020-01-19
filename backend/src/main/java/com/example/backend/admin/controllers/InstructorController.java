@@ -8,6 +8,8 @@ import com.example.backend.admin.services.InstructorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,5 +74,21 @@ public class InstructorController {
             logger.error("Instructor not in database. re check the instructor id number", e);
         }
         return instructor;
+    }
+
+    /**
+     * to delete instructor
+     * @param instructorId instructor id
+     * @return response of request
+     */
+    @DeleteMapping("/delete/{instructorId}")
+    public ResponseEntity<?> deleteInstructor(@PathVariable int instructorId){
+        Instructor instructor = null;
+        try {
+            instructor = instructorService.getOneInstructor(instructorId);
+        } catch (InstructorNotFoundException e) {
+            logger.error("instructor not in database. re check the instructor id number", e);
+        }
+        return instructorService.deleteInstructor(instructor);
     }
 }
