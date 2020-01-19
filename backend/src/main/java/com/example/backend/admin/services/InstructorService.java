@@ -6,6 +6,8 @@ import com.example.backend.admin.models.Lecturer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * service for the instructor
  */
@@ -21,5 +23,13 @@ public class InstructorService {
      */
     public Instructor addInstructor(Instructor instructor){
         return instructorRepository.save(instructor);
+    }
+
+    /**
+     * to invoke find all method in jpa
+     * @return list of instructor
+     */
+    public List<Instructor> getAllInstructor(){
+        return instructorRepository.findAll();
     }
 }
