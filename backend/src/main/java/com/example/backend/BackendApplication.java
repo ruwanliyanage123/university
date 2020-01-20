@@ -11,3 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 }
 
 
+    class Company{
+        private int companyId;
+        private String companyName;
+        private String address;
+
+        //getters and setters
+    }
+
+    class Employee{
+        private int id;
+        private String name;
+        private int companyId;//this field use to refer the company table
+
+        //getters and setters
+    }

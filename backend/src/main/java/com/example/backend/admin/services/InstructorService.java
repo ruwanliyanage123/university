@@ -2,9 +2,7 @@ package com.example.backend.admin.services;
 
 import com.example.backend.admin.Repositories.InstructorRepository;
 import com.example.backend.admin.exceptions.InstructorNotFoundException;
-import com.example.backend.admin.exceptions.LecturerNotFoundException;
 import com.example.backend.admin.models.Instructor;
-import com.example.backend.admin.models.Lecturer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

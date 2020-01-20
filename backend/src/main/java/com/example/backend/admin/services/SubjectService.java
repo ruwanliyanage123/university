@@ -1,14 +1,11 @@
 package com.example.backend.admin.services;
 
 import com.example.backend.admin.Repositories.SubjectRepository;
-import com.example.backend.admin.exceptions.StudentNotFoundException;
 import com.example.backend.admin.exceptions.SubjectNotFoundException;
-import com.example.backend.admin.models.Student;
 import com.example.backend.admin.models.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import sun.awt.SunToolkit;
 
 import java.util.List;
 
